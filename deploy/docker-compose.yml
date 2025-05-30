@@ -1,4 +1,33 @@
-version: '3'
+version: '3.8'
 services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: hubbax
+      POSTGRES_PASSWORD: hubbax
+      POSTGRES_DB: hubbax
+    volumes:
+      - db_data:/var/lib/postgresql/data
   backend:
     image: node:18
+    working_dir: /app
+    volumes:
+      - ../backend:/app
+    environment:
+      DATABASE_URL: postgres://hubbax:hubbax@db:5432/hubbax
+    depends_on:
+      - db
+  frontend:
+    image: node:18
+    working_dir: /app
+    volumes:
+      - ../frontend:/app
+    command: ["npm", "start"]
+  ai:
+    image: python:3.10
+    working_dir: /app
+    volumes:
+      - ../ai:/app
+    command: ["python", "main.py"]
+volumes:
+  db_data:
