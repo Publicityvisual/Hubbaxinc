@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HubbaX Inc AI Demo</title>
+</head>
+<body>
+    <h1>Generador de contenido</h1>
+    <p><a href="/builder.html">Ir al constructor de páginas</a></p>
+    <textarea id="prompt" rows="4" cols="50" placeholder="Escribe tu prompt"></textarea>
+    <br>
+    <button onclick="generate()">Generar</button>
+    <pre id="result"></pre>
+    <script>
+        async function generate() {
+            const prompt = document.getElementById('prompt').value;
+            const res = await fetch('/api/generate', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({prompt})
+            });
+            const data = await res.json();
+            document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+        }
+    </script>
+</body>
+</html>
