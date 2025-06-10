@@ -1,5 +1,5 @@
 #!/bin/bash
-# Configuración del VPS para HubbaX
+# Configuración del VPS para HubbaX Inc
 set -e
 
 # Actualiza el sistema
@@ -18,7 +18,7 @@ fi
 sudo ufw allow 80
 sudo ufw allow 443
 
-# Crea usuario para HubbaX
+# Crea usuario para HubbaX Inc
 sudo useradd -m -s /bin/bash hubbax || true
 
 echo "VPS configurado. Inicia sesión con el usuario 'hubbax' para continuar."

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HubbaX Inc Builder</title>
+    <link href="https://unpkg.com/grapesjs@0.21.8/dist/css/grapes.min.css" rel="stylesheet"/>
+    <style>
+      body, html { height: 100%; margin: 0; }
+      #gjs { height: 100%; }
+    </style>
+</head>
+<body>
+  <div style="padding:10px;background:#eee">
+    <input id="desc" placeholder="Describe la página" style="width:70%"/>
+    <button onclick="generate()">Generar HTML</button>
+  </div>
+  <div id="gjs"></div>
+  <script src="https://unpkg.com/grapesjs@0.21.8/dist/grapes.min.js"></script>
+  <script>
+    const editor = grapesjs.init({
+      container: '#gjs',
+      fromElement: false,
+      height: '100%'
+    });
+
+    async function generate() {
+      const desc = document.getElementById('desc').value;
+      const res = await fetch('/api/generate-html', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ description: desc })
+      });
+      const data = await res.json();
+      if (data.error) {
+        alert('Error al generar');
+        return;
+      }
+      editor.setComponents(data.generated || '');
+    }
+  </script>
+</body>
+</html>

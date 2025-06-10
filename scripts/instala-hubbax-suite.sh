@@ -1,5 +1,5 @@
 #!/bin/bash
-# Instalador completo de HubbaX
+# Instalador completo de HubbaX Inc
 set -e
 
 # Instala dependencias si no existen
@@ -20,4 +20,4 @@ cd "$ROOT_DIR/deploy"
 
 docker compose up -d
 
-echo "HubbaX se está ejecutando. Usa 'docker compose ps' para verificar los servicios."
+echo "HubbaX Inc se está ejecutando. Usa 'docker compose ps' para verificar los servicios."
